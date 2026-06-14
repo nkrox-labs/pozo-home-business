@@ -1,22 +1,27 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Pozo Home & Business API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: quotes
+    description: Quote/Cotización operations
+  - name: admin
+    description: Admin dashboard operations
+  - name: services
+    description: Services catalog
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +29,213 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /quotes:
+    get:
+      operationId: listQuotes
+      tags: [quotes, admin]
+      summary: List all quotes (admin)
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, reviewing, in_progress, completed]
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        "200":
+          description: List of quotes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuoteList"
+    post:
+      operationId: createQuote
+      tags: [quotes]
+      summary: Submit a new quote request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuoteInput"
+      responses:
+        "201":
+          description: Quote created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quote"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /quotes/{id}:
+    get:
+      operationId: getQuote
+      tags: [quotes, admin]
+      summary: Get a single quote by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Quote details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quote"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    patch:
+      operationId: updateQuote
+      tags: [admin]
+      summary: Update quote status (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuoteUpdate"
+      responses:
+        "200":
+          description: Updated quote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quote"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      operationId: deleteQuote
+      tags: [admin]
+      summary: Delete a quote (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /quotes/stats:
+    get:
+      operationId: getQuoteStats
+      tags: [admin]
+      summary: Get quote statistics for admin dashboard
+      responses:
+        "200":
+          description: Quote statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuoteStats"
+
+  /services:
+    get:
+      operationId: listServices
+      tags: [services]
+      summary: Get all available services
+      responses:
+        "200":
+          description: List of services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Service"
+
+  /admin/login:
+    post:
+      operationId: adminLogin
+      tags: [admin]
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginInput"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSession"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /admin/logout:
+    post:
+      operationId: adminLogout
+      tags: [admin]
+      summary: Admin logout
+      responses:
+        "200":
+          description: Logged out
+
+  /admin/me:
+    get:
+      operationId: getAdminMe
+      tags: [admin]
+      summary: Get current admin session
+      responses:
+        "200":
+          description: Admin session info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSession"
+        "401":
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +246,160 @@ components:
       required:
         - status
 
+    Quote:
+      type: object
+      required: [id, name, email, phone, address, serviceType, description, priority, status, createdAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+        serviceType:
+          type: string
+        description:
+          type: string
+        priority:
+          type: string
+          enum: [low, normal, urgent]
+        status:
+          type: string
+          enum: [pending, reviewing, in_progress, completed]
+        adminNotes:
+          type: ["string", "null"]
+        imageUrls:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: ["string", "null"]
+
+    QuoteInput:
+      type: object
+      required: [name, email, phone, address, serviceType, description, priority]
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+          minLength: 7
+          maxLength: 20
+        address:
+          type: string
+          minLength: 5
+          maxLength: 300
+        serviceType:
+          type: string
+        description:
+          type: string
+          minLength: 10
+          maxLength: 2000
+        priority:
+          type: string
+          enum: [low, normal, urgent]
+        imageUrls:
+          type: array
+          items:
+            type: string
+
+    QuoteUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [pending, reviewing, in_progress, completed]
+        adminNotes:
+          type: string
+
+    QuoteList:
+      type: object
+      required: [quotes, total, page, limit]
+      properties:
+        quotes:
+          type: array
+          items:
+            $ref: "#/components/schemas/Quote"
+        total:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+
+    QuoteStats:
+      type: object
+      required: [total, pending, reviewing, in_progress, completed, todayCount, weekCount]
+      properties:
+        total:
+          type: integer
+        pending:
+          type: integer
+        reviewing:
+          type: integer
+        in_progress:
+          type: integer
+        completed:
+          type: integer
+        todayCount:
+          type: integer
+        weekCount:
+          type: integer
+
+    Service:
+      type: object
+      required: [id, name, description, category, icon]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+          enum: [residential, commercial, industrial]
+        icon:
+          type: string
+
+    AdminLoginInput:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+
+    AdminSession:
+      type: object
+      required: [id, email, name]
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        name:
+          type: string
+
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+        details:
+          type: ["string", "null"]

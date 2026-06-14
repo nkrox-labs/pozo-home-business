@@ -1,8 +1,15 @@
 import express, { type Express } from "express";
 import cors from "cors";
 import pinoHttp from "pino-http";
+import cookieParser from "cookie-parser";
+import session from "express-session";
 import router from "./routes";
 import { logger } from "./lib/logger";
+import { securityHeaders, apiRateLimit } from "./middlewares/security";
+
+if (!process.env["SESSION_SECRET"]) {
+  throw new Error("SESSION_SECRET environment variable is required.");
+}
 
 const app: Express = express();
 
@@ -25,10 +32,29 @@ app.use(
     },
   }),
 );
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
+app.use(securityHeaders);
+app.use(cors({
+  origin: true,
+  credentials: true,
+}));
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+app.use(cookieParser());
+
+app.use(session({
+  secret: process.env["SESSION_SECRET"]!,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env["NODE_ENV"] === "production",
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000,
+    sameSite: "lax",
+  },
+}));
+
+app.use(apiRateLimit);
 app.use("/api", router);
 
 export default app;

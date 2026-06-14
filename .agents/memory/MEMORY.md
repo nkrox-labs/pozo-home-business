@@ -1,0 +1,2 @@
+- [React Three Fiber + React 19](r3f-react19.md) — R3F v8 breaks on React 19 (ReactCurrentOwner removed); use HTML5 Canvas instead or upgrade carefully.
+- [React Query 4xx retry](rq-retry.md) — default React Query retries on 401 cause long blank screens; configure retry to return false for 4xx.
