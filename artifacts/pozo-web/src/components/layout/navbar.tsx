@@ -10,6 +10,7 @@ export function Navbar() {
   const links = [
     { href: "/", label: "Inicio" },
     { href: "/servicios", label: "Servicios" },
+    { href: "/cotizar", label: "Cotización" },
   ];
 
   return (

@@ -1,0 +1,338 @@
+CREA UNA PÁGINA WEB PREMIUM EN 3D PARA UNA EMPRESA LLAMADA "POZO HOME & BUSINESS".
+
+INSPIRACIÓN VISUAL:
+La página debe inspirarse en el estilo moderno, futurista y tridimensional de Spline. Quiero una experiencia visual impactante con elementos 3D interactivos, animaciones suaves, profundidad visual, efectos glassmorphism, iluminación ambiental, sombras dinámicas y una navegación elegante.
+
+ESTILO GENERAL:
+
+* Diseño ultra profesional.
+* Aspecto corporativo premium.
+* Colores principales:
+
+  * Azul eléctrico.
+  * Negro profundo.
+  * Gris grafito.
+  * Blanco.
+  * Detalles en naranja industrial.
+* Fondo con efectos de partículas y movimiento suave.
+* Animaciones al hacer scroll.
+* Transiciones fluidas.
+* Compatible con dispositivos móviles.
+* Optimizado para SEO.
+* Carga rápida.
+
+SECCIÓN HERO PRINCIPAL:
+
+Título grande:
+
+"Soluciones Integrales para Hogares, Empresas y Condominios"
+
+Subtítulo:
+
+"Electricidad, Gasfitería, Construcción, Estructuras Metálicas, Techumbres, Pintura y Jardinería. Desde reparaciones menores hasta proyectos industriales completos."
+
+Botones:
+
+[Solicitar Cotización]
+[Contactar por WhatsApp]
+
+Mostrar una estructura 3D flotante relacionada con construcción, electricidad y estructuras metálicas.
+
+SECCIÓN QUIÉNES SOMOS
+
+Título:
+"Pozo Home & Business"
+
+Descripción:
+
+"Somos una empresa especializada en mantenimiento, reparación, construcción y servicios industriales. Entregamos soluciones profesionales para hogares, condominios, comercios, galpones y plantas industriales, garantizando calidad, seguridad y cumplimiento de normas técnicas."
+
+Mostrar estadísticas animadas:
+
++500 Proyectos
++100 Clientes
++10 Años de Experiencia
+100% Compromiso
+
+SECCIÓN SERVICIOS
+
+Crear tarjetas 3D modernas con iconos y animaciones.
+
+SERVICIO 1:
+⚡ ELECTRICIDAD
+
+Subcategorías:
+
+Residencial:
+
+* Cambio de enchufes.
+* Cambio de interruptores.
+* Instalación de luminarias.
+* Instalación de diferenciales.
+* Reparación de cortocircuitos.
+* Detección de fugas eléctricas.
+* Re-cableado.
+* Puesta a tierra.
+* Cambio de tableros eléctricos.
+* Cámaras de seguridad.
+
+Industrial:
+
+* Equilibrado de fases.
+* Motores trifásicos.
+* Variadores de frecuencia.
+* Contactores y relés.
+* Bancos de capacitores.
+* Generadores.
+* Tableros industriales.
+* Canalizaciones EMT.
+* Sistemas de tierra industrial.
+
+SERVICIO 2:
+🚰 GASFITERÍA
+
+Residencial:
+
+* Filtraciones.
+* Destapes.
+* Calefón.
+* WC.
+* Griferías.
+* Termos eléctricos.
+* Bombas de agua.
+* Redes domiciliarias.
+
+Industrial:
+
+* Redes completas de agua potable.
+* Alcantarillado.
+* Cámaras de inspección.
+* Redes sanitarias.
+* Conexiones industriales.
+
+SERVICIO 3:
+🎨 PINTURA
+
+Residencial:
+
+* Muros.
+* Fachadas.
+* Techos.
+* Barnices.
+* Papel mural.
+* Rejas y portones.
+
+Industrial:
+
+* Pintura epóxica.
+* Pintura intumescente.
+* Anticorrosivos.
+* Demarcación vial.
+* Revestimientos industriales.
+* Airless.
+
+SERVICIO 4:
+🏠 TECHUMBRES
+
+Residencial:
+
+* Reparación de goteras.
+* Cambio de techos.
+* Canaletas.
+* Aislación térmica.
+* Cerchas.
+* Lucarnas.
+
+Industrial:
+
+* Paneles sándwich.
+* Cubiertas industriales.
+* Líneas de vida.
+* Extractores eólicos.
+* Impermeabilización.
+* Refuerzos estructurales.
+
+SERVICIO 5:
+🌿 JARDINERÍA
+
+Residencial:
+
+* Corte de césped.
+* Riego automático.
+* Poda.
+* Fertilización.
+* Diseño de jardines.
+
+Industrial:
+
+* Mantención de áreas verdes.
+* Tala y poda de altura.
+* Control de malezas.
+* Xeropaisajismo.
+* Limpieza de terrenos.
+
+SERVICIO 6:
+🏗️ ESTRUCTURAS METÁLICAS
+
+Residencial:
+
+* Rejas.
+* Portones.
+* Escaleras.
+* Cobertizos.
+* Terrazas.
+* Pasamanos.
+
+Industrial:
+
+* Racks.
+* Plataformas.
+* Pasarelas.
+* Protecciones industriales.
+* Escaleras de servicio.
+* Reparación de estructuras.
+
+SERVICIO 7:
+🏢 CONSTRUCCIÓN
+
+Residencial:
+
+* Ampliaciones.
+* Remodelaciones.
+* Baños.
+* Cocinas.
+* Quinchos.
+* Pisos.
+* Tabiques.
+
+Industrial:
+
+* Oficinas modulares.
+* Comedores.
+* Vestuarios.
+* Bases de maquinaria.
+* Cierres perimetrales.
+* Accesibilidad universal.
+
+SECCIÓN DE COTIZACIÓN
+
+Crear un formulario moderno y elegante.
+
+Campos:
+
+* Nombre Completo.
+
+* Correo Electrónico.
+
+* Teléfono.
+
+* Dirección.
+
+* Tipo de Cliente:
+
+  * Particular
+  * Empresa
+  * Condominio
+
+* Servicio Requerido.
+
+* Descripción del Trabajo.
+
+* Prioridad:
+
+  * Baja
+  * Normal
+  * Urgente
+
+* Subir Fotografías.
+
+Botón:
+
+"Solicitar Cotización"
+
+Al enviar:
+Guardar en base de datos y enviar correo automáticamente al administrador.
+
+SECCIÓN DE PROYECTOS
+
+Mostrar galería 3D interactiva con:
+
+* Electricidad.
+* Gasfitería.
+* Construcción.
+* Techumbres.
+* Pintura.
+* Estructuras Metálicas.
+
+Animación tipo carrusel 3D.
+
+SECCIÓN TESTIMONIOS
+
+Tarjetas flotantes con opiniones de clientes.
+
+SECCIÓN CONTACTO
+
+WhatsApp flotante permanente.
+
+Información:
+
+Pozo Home & Business
+
+Teléfono:
++56 9 XXXX XXXX
+
+Correo:
+[contacto@pozohomebusiness.cl](mailto:contacto@pozohomebusiness.cl)
+
+Horario:
+Lunes a Domingo
+08:00 a 20:00
+
+Mapa interactivo.
+
+FOOTER PREMIUM
+
+* Inicio
+* Servicios
+* Proyectos
+* Cotización
+* Contacto
+
+Redes Sociales:
+Facebook
+Instagram
+LinkedIn
+
+REQUISITOS TÉCNICOS
+
+Frontend:
+
+* React
+* Next.js
+* Tailwind CSS
+* Framer Motion
+* Three.js
+* React Three Fiber
+
+Backend:
+
+* Node.js
+* API REST
+
+Base de Datos:
+
+* PostgreSQL
+
+Características:
+
+* SEO avanzado.
+* Diseño responsive.
+* Seguridad.
+* Formulario conectado.
+* Optimización de velocidad.
+* Animaciones profesionales.
+* Experiencia visual tipo empresa multinacional.
+
+OBJETIVO:
+
+Que el visitante sienta que está entrando a una empresa moderna, tecnológica y de alto nivel, capaz de realizar desde una reparación doméstica hasta proyectos industriales completos.

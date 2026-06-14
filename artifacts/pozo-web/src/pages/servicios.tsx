@@ -1,113 +1,207 @@
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { useListServices } from "@workspace/api-client-react";
-import { motion } from "framer-motion";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import {
-  Home as HomeIcon,
-  Building2,
-  Factory,
-  Paintbrush,
-  Droplets,
-  Zap,
-  Hammer,
-  LayoutGrid,
-  Wind,
-  Gauge,
-  Lightbulb,
-  Building,
-  LayoutDashboard,
-  ShieldCheck,
-  FlaskConical,
-  Cpu,
-  Layers,
-  Settings,
-  AlertTriangle,
-  Wrench,
-  ArrowRight,
-  CheckCircle2,
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle2, Zap, Wrench, Paintbrush, Home as HomeIcon, Leaf, Building2, Briefcase } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const iconMap: Record<string, LucideIcon> = {
-  Paintbrush,
-  Home: HomeIcon,
-  Droplets,
-  Pipette: Wrench,
-  Zap,
-  Hammer,
-  LayoutGrid,
-  Wind,
-  Building2,
-  Gauge,
-  Lightbulb,
-  Building,
-  LayoutDashboard,
-  ShieldCheck,
-  Factory,
-  FlaskConical,
-  Cpu,
-  Layers,
-  Settings,
-  AlertTriangle,
-  Wrench,
-};
+interface ServiceCategory {
+  icon: LucideIcon;
+  emoji: string;
+  label: string;
+  color: string;
+  border: string;
+  iconColor: string;
+  description: string;
+  residential: string[];
+  industrial: string[];
+}
 
-const serviceHighlights: Record<string, string[]> = {
-  "Pintura Interior": ["Colores Sherwin-Williams y Sikkens", "Imprimante sellador incluido", "Acabados mate, satinado y semi-brillante"],
-  "Pintura Exterior": ["Resistente a UV e intemperie", "Sellado de grietas previo", "Garantía 3 años"],
-  "Impermeabilización": ["Membranas asfálticas y cristalizantes", "Techos, terrazas y fundaciones", "Garantía 5 años"],
-  "Gasfitería y Plomería": ["Agua fría, caliente y gas", "Urgencias 24/7", "Calefones y sistemas de red"],
-  "Electricidad Residencial": ["Tableros y circuitos", "Iluminación LED y domótica", "Certificación SEC"],
-  "Carpintería a Medida": ["Closets, cocinas y puertas", "Melamina, MDF o madera nativa", "Diseño a planos o medidas propias"],
-  "Pisos y Revestimientos": ["Flotante, porcelanato y cerámica", "Nivelación de base incluida", "Interiores y exteriores"],
-  "Climatización": ["Split, minisplit y piso radiante", "Mantenimiento de equipos", "Diagnóstico energético"],
-  "Pintura Comercial": ["Trabajo nocturno disponible", "Mínima interrupción operativa", "Cumplimiento de plazos garantizado"],
-  "Gasfitería Comercial": ["Redes de agua y alcantarillado", "Gas licuado y natural", "Certificación Supergas y Metrogas"],
-  "Electricidad Comercial": ["Tableros de distribución", "Iluminación eficiente y UPS", "Certificación SEC"],
-  "Mantenimiento de Edificios": ["Programa preventivo integral", "Contratos mensuales y anuales", "Personal dedicado"],
-  "Remodelación de Espacios": ["Tabiques y cielos americanos", "Pisos vinílicos y amoblado", "Entrega llave en mano"],
-  "Sistemas de Seguridad": ["Cámaras IP y alarmas", "Control de acceso biométrico", "Detección y supresión de incendio"],
-  "Instalaciones Industriales": ["Estructuras y tuberías de proceso", "Soldadura certificada", "Pinturas anticorrosivas"],
-  "Gasfitería Industrial": ["Vapor, aire comprimido y gases", "Tratamiento de aguas residuales", "Diseño de ingeniería"],
-  "Electricidad Industrial": ["Media tensión y tableros MCC", "Automatización PLC y SCADA", "Variadores y motores"],
-  "Recubrimientos Industriales": ["Pisos epóxicos autonivelantes", "Resistencia química y tráfico pesado", "Poliuretano y anticorrosivo"],
-  "Mantenimiento de Plantas": ["Mecánica, eléctrica e instrumentación", "Producción continua sin parar", "Personal técnico especializado"],
-  "Señalización Industrial": ["ISO 3864 y NFPA", "Demarcación y franjas peatonales", "Rótulos y letreros reflectantes"],
-};
+const categories: ServiceCategory[] = [
+  {
+    icon: Zap,
+    emoji: "⚡",
+    label: "Electricidad",
+    color: "from-yellow-500/10 to-transparent",
+    border: "border-yellow-500/20",
+    iconColor: "text-yellow-400",
+    description: "Instalaciones eléctricas residenciales e industriales con certificación SEC. Desde enchufes hasta tableros industriales y automatización.",
+    residential: [
+      "Cambio de enchufes e interruptores",
+      "Instalación de luminarias y LED",
+      "Instalación de diferenciales",
+      "Reparación de cortocircuitos",
+      "Detección de fugas eléctricas",
+      "Re-cableado completo",
+      "Puesta a tierra",
+      "Cambio de tableros eléctricos",
+      "Cámaras de seguridad",
+    ],
+    industrial: [
+      "Equilibrado de fases",
+      "Motores trifásicos",
+      "Variadores de frecuencia",
+      "Contactores y relés",
+      "Bancos de capacitores",
+      "Generadores industriales",
+      "Tableros industriales MCC",
+      "Canalizaciones EMT",
+      "Sistemas de tierra industrial",
+    ],
+  },
+  {
+    icon: Wrench,
+    emoji: "🚰",
+    label: "Gasfitería",
+    color: "from-blue-500/10 to-transparent",
+    border: "border-blue-500/20",
+    iconColor: "text-blue-400",
+    description: "Redes de agua potable, alcantarillado y gasfitería completa para hogares y plantas industriales. Urgencias 24/7.",
+    residential: [
+      "Reparación de filtraciones",
+      "Destapes y desatascamientos",
+      "Instalación y reparación de calefón",
+      "Reparación de WC y griferías",
+      "Termos eléctricos",
+      "Bombas de agua",
+      "Redes domiciliarias de agua y gas",
+    ],
+    industrial: [
+      "Redes completas de agua potable",
+      "Sistemas de alcantarillado",
+      "Cámaras de inspección",
+      "Redes sanitarias industriales",
+      "Conexiones y tuberías industriales",
+      "Sistemas de vapor y aire comprimido",
+    ],
+  },
+  {
+    icon: Paintbrush,
+    emoji: "🎨",
+    label: "Pintura",
+    color: "from-orange-500/10 to-transparent",
+    border: "border-orange-500/20",
+    iconColor: "text-orange-400",
+    description: "Pintura interior, exterior e industrial. Productos premium Sherwin-Williams y Sikkens con garantía de durabilidad.",
+    residential: [
+      "Pintura de muros y cielos",
+      "Pintura de fachadas",
+      "Pintura de techos",
+      "Barnices y lacas",
+      "Papel mural",
+      "Rejas y portones",
+    ],
+    industrial: [
+      "Pintura epóxica de pisos",
+      "Pintura intumescente (cortafuego)",
+      "Anticorrosivos de alto espesor",
+      "Demarcación vial y de piso",
+      "Revestimientos industriales",
+      "Aplicación con equipo Airless",
+    ],
+  },
+  {
+    icon: HomeIcon,
+    emoji: "🏠",
+    label: "Techumbres",
+    color: "from-slate-500/10 to-transparent",
+    border: "border-slate-500/20",
+    iconColor: "text-slate-300",
+    description: "Instalación y reparación de techos residenciales e industriales. Sellamos goteras y garantizamos impermeabilidad.",
+    residential: [
+      "Reparación de goteras",
+      "Cambio completo de techos",
+      "Instalación de canaletas",
+      "Aislación térmica y acústica",
+      "Cerchas de madera y metal",
+      "Lucarnas y tragaluces",
+    ],
+    industrial: [
+      "Paneles sándwich aislantes",
+      "Cubiertas industriales y galpones",
+      "Líneas de vida y acceso seguro",
+      "Extractores eólicos y ventilación",
+      "Impermeabilización de techos planos",
+      "Refuerzos estructurales",
+    ],
+  },
+  {
+    icon: Leaf,
+    emoji: "🌿",
+    label: "Jardinería",
+    color: "from-green-500/10 to-transparent",
+    border: "border-green-500/20",
+    iconColor: "text-green-400",
+    description: "Mantención y diseño de jardines residenciales y áreas verdes para condominios e industrias.",
+    residential: [
+      "Corte y mantención de césped",
+      "Instalación de riego automático",
+      "Poda de árboles y arbustos",
+      "Fertilización y control plagas",
+      "Diseño de jardines",
+    ],
+    industrial: [
+      "Mantención de áreas verdes",
+      "Tala y poda de altura",
+      "Control de malezas",
+      "Xeropaisajismo (bajo consumo de agua)",
+      "Limpieza de terrenos industriales",
+    ],
+  },
+  {
+    icon: Building2,
+    emoji: "🏗️",
+    label: "Estructuras Metálicas",
+    color: "from-zinc-500/10 to-transparent",
+    border: "border-zinc-500/20",
+    iconColor: "text-zinc-300",
+    description: "Fabricación e instalación de estructuras metálicas para hogares y grandes proyectos industriales. Soldadura certificada.",
+    residential: [
+      "Rejas de seguridad",
+      "Portones automáticos y manuales",
+      "Escaleras metálicas",
+      "Cobertizos y pergolas",
+      "Terrazas y decks metálicos",
+      "Pasamanos y barandas",
+    ],
+    industrial: [
+      "Racks y estanterías industriales",
+      "Plataformas y mesanines",
+      "Pasarelas de acceso",
+      "Protecciones para maquinaria",
+      "Escaleras de servicio industrial",
+      "Reparación de estructuras existentes",
+    ],
+  },
+  {
+    icon: Briefcase,
+    emoji: "🏢",
+    label: "Construcción",
+    color: "from-amber-500/10 to-transparent",
+    border: "border-amber-500/20",
+    iconColor: "text-amber-400",
+    description: "Proyectos completos de construcción y remodelación. Desde quinchos y baños hasta plantas industriales y oficinas modulares.",
+    residential: [
+      "Ampliaciones de casas",
+      "Remodelación de baños y cocinas",
+      "Quinchos y terrazas",
+      "Pisos y revestimientos",
+      "Tabiques y divisiones",
+      "Accesibilidad universal",
+    ],
+    industrial: [
+      "Oficinas modulares",
+      "Comedores y salas de descanso",
+      "Vestuarios y camarines",
+      "Bases de maquinaria y fundaciones",
+      "Cierres perimetrales y portones",
+      "Accesibilidad y rampas normativas",
+    ],
+  },
+];
 
 export default function Servicios() {
-  const { data: services, isLoading } = useListServices();
-
-  const categories = [
-    {
-      id: "residential",
-      label: "Residencial",
-      desc: "Soluciones de alta gama para su hogar",
-      icon: HomeIcon,
-      gradient: "from-amber-500/10 to-transparent",
-      border: "border-amber-500/20",
-    },
-    {
-      id: "commercial",
-      label: "Comercial",
-      desc: "Mantenimiento y desarrollo para negocios",
-      icon: Building2,
-      gradient: "from-blue-500/10 to-transparent",
-      border: "border-blue-500/20",
-    },
-    {
-      id: "industrial",
-      label: "Industrial",
-      desc: "Operaciones de gran escala y precisión",
-      icon: Factory,
-      gradient: "from-slate-500/10 to-transparent",
-      border: "border-slate-500/20",
-    },
-  ];
-
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
@@ -128,109 +222,62 @@ export default function Servicios() {
               Nuestros <span className="text-primary">Servicios</span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Más de 20 servicios especializados para el hogar, comercio e industria.
-              Ejecutados por técnicos certificados con garantía escrita en cada trabajo.
+              7 áreas de especialización para el hogar, comercio e industria. Técnicos certificados
+              con garantía escrita en cada trabajo.
             </p>
           </motion.div>
 
-          {isLoading ? (
-            <div className="space-y-16">
-              {[1, 2, 3].map((s) => (
-                <div key={s} className="space-y-6">
-                  <Skeleton className="h-10 w-48 rounded-lg bg-card" />
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {[1, 2, 3, 4, 5, 6].map((i) => (
-                      <Skeleton key={i} className="h-64 w-full rounded-xl bg-card" />
-                    ))}
+          <div className="space-y-20">
+            {categories.map((cat, i) => (
+              <motion.section
+                key={cat.label}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className={`flex items-center gap-4 mb-8 pb-5 border-b ${cat.border}`}>
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.color} border ${cat.border} flex items-center justify-center text-2xl`}>
+                    {cat.emoji}
+                  </div>
+                  <div className="flex-1">
+                    <h2 className="text-2xl md:text-3xl font-bold">{cat.label}</h2>
+                    <p className="text-muted-foreground text-sm mt-1 max-w-2xl">{cat.description}</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="space-y-28">
-              {categories.map((cat, categoryIndex) => {
-                const catServices = services?.filter((s) => s.category === cat.id) ?? [];
-                if (catServices.length === 0) return null;
-                const CatIcon = cat.icon;
 
-                return (
-                  <motion.section
-                    key={cat.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-                  >
-                    <div className={`flex items-center gap-4 mb-10 pb-5 border-b ${cat.border}`}>
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${cat.gradient} border ${cat.border} flex items-center justify-center`}>
-                        <CatIcon className="w-6 h-6 text-primary" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+                    { title: "Residencial", items: cat.residential },
+                    { title: "Industrial / Comercial", items: cat.industrial },
+                  ].map((section) => (
+                    <div
+                      key={section.title}
+                      className={`bg-card border ${cat.border} rounded-2xl p-6`}
+                    >
+                      <h3 className={`font-bold text-base mb-4 ${cat.iconColor}`}>{section.title}</h3>
+                      <ul className="space-y-2">
+                        {section.items.map((item) => (
+                          <li key={item} className="flex items-center gap-2.5 text-sm text-muted-foreground">
+                            <CheckCircle2 className={`w-3.5 h-3.5 ${cat.iconColor} flex-shrink-0`} />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-6 pt-5 border-t border-border">
+                        <Link href="/cotizar">
+                          <Button variant="outline" size="sm" className={`w-full border-border hover:${cat.border} group transition-all`}>
+                            Solicitar Cotización
+                            <ArrowRight className="w-3.5 h-3.5 ml-2 group-hover:translate-x-1 transition-transform" />
+                          </Button>
+                        </Link>
                       </div>
-                      <div>
-                        <h2 className="text-3xl font-bold">{cat.label}</h2>
-                        <p className="text-muted-foreground text-sm mt-0.5">{cat.desc}</p>
-                      </div>
-                      <span className="ml-auto text-sm text-muted-foreground font-medium hidden sm:block">
-                        {catServices.length} servicios
-                      </span>
                     </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {catServices.map((service, i) => {
-                        const ServiceIcon = iconMap[service.icon] ?? Wrench;
-                        const highlights = serviceHighlights[service.name] ?? [];
-
-                        return (
-                          <motion.div
-                            key={service.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-40px" }}
-                            transition={{ delay: i * 0.07, duration: 0.4 }}
-                            className="group bg-card border border-border rounded-2xl p-6 flex flex-col hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
-                          >
-                            <div className="flex items-start gap-4 mb-4">
-                              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                                <ServiceIcon className="w-5 h-5 text-primary" />
-                              </div>
-                              <h3 className="text-base font-bold leading-snug group-hover:text-primary transition-colors pt-1">
-                                {service.name}
-                              </h3>
-                            </div>
-
-                            <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
-                              {service.description}
-                            </p>
-
-                            {highlights.length > 0 && (
-                              <ul className="space-y-1.5 mb-6">
-                                {highlights.map((h) => (
-                                  <li key={h} className="flex items-center gap-2 text-xs text-muted-foreground">
-                                    <CheckCircle2 className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                                    {h}
-                                  </li>
-                                ))}
-                              </ul>
-                            )}
-
-                            <Link href="/cotizar">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="w-full border-border hover:border-primary hover:text-primary group/btn transition-all"
-                              >
-                                Solicitar Cotización
-                                <ArrowRight className="w-3.5 h-3.5 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                              </Button>
-                            </Link>
-                          </motion.div>
-                        );
-                      })}
-                    </div>
-                  </motion.section>
-                );
-              })}
-            </div>
-          )}
+                  ))}
+                </div>
+              </motion.section>
+            ))}
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -239,17 +286,27 @@ export default function Servicios() {
             transition={{ duration: 0.5 }}
             className="mt-24 bg-card border border-border rounded-2xl p-10 text-center"
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">¿No encuentra lo que busca?</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3">¿Proyecto especial?</h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Contamos con técnicos especializados en muchas más áreas. Cuéntenos su proyecto
-              y le daremos una solución a la medida.
+              Contamos con técnicos en muchas más áreas. Cuéntenos su proyecto y le damos
+              una solución a la medida.
             </p>
-            <Link href="/cotizar">
-              <Button size="lg" className="font-semibold px-8">
-                Cotizar Proyecto Personalizado
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/cotizar">
+                <Button size="lg" className="font-semibold px-8">
+                  Cotizar Proyecto
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+              <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" size="lg" className="border-green-500/40 text-green-400 hover:bg-green-500/10 px-8">
+                  <svg viewBox="0 0 24 24" className="w-4 h-4 mr-2 fill-current">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                  </svg>
+                  Escribir por WhatsApp
+                </Button>
+              </a>
+            </div>
           </motion.div>
         </div>
       </main>
