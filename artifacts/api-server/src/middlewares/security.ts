@@ -40,7 +40,6 @@ export const quoteSubmitRateLimit = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: "Límite de cotizaciones alcanzado. Intenta en 1 hora." },
-  keyGenerator: (req) => req.ip ?? req.headers["x-forwarded-for"]?.toString() ?? "unknown",
 });
 
 export const adminLoginRateLimit = rateLimit({
