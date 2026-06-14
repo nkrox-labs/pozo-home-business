@@ -1,0 +1,320 @@
+# ESTRUCTURA PREMIUM 3D — POZO HOME & BUSINESS
+
+## 1. PRELOADER CINEMÁTICO
+
+Al abrir la página:
+
+* Logo animado de "Pozo Home & Business"
+* Partículas metálicas flotantes
+* Efecto de ensamblaje industrial
+* Duración: 2–3 segundos
+
+Animación tipo:
+"Construimos. Reparamos. Protegemos."
+
+---
+
+## 2. HERO 3D INTERACTIVO
+
+Pantalla completa (100vh).
+
+Fondo:
+
+* Ciudad 3D futurista.
+* Viviendas.
+* Condominios.
+* Galpones industriales.
+* Grúas y estructuras metálicas.
+
+Elemento 3D central:
+Un modelo interactivo que combine:
+
+* Casa inteligente.
+* Galpón industrial.
+* Tablero eléctrico.
+* Redes sanitarias.
+* Techumbre.
+* Jardín.
+
+Texto principal:
+
+# Soluciones Integrales para Hogares, Empresas e Industrias
+
+Subtítulo:
+
+"Desde una reparación doméstica hasta proyectos industriales de gran escala."
+
+Botones:
+
+[Solicitar Cotización]
+[WhatsApp]
+[Ver Servicios]
+
+Indicadores animados:
+
+✓ Atención residencial
+✓ Condominios
+✓ Empresas
+✓ Industria
+✓ Emergencias
+
+---
+
+## 3. SECCIÓN DE CONFIANZA
+
+Mostrar métricas animadas:
+
+500+ proyectos
+100+ clientes
+10+ años de experiencia
+24/7 soporte
+100% compromiso
+
+Agregar sellos:
+
+* Seguridad laboral
+* Calidad garantizada
+* Atención rápida
+* Personal capacitado
+* Cumplimiento normativo
+
+---
+
+## 4. QUIÉNES SOMOS
+
+Mostrar timeline interactivo:
+
+Diagnóstico → Diseño → Ejecución → Entrega → Postventa
+
+Descripción:
+
+Pozo Home & Business ofrece soluciones integrales para viviendas, condominios, empresas e industrias, integrando construcción, electricidad, estructuras metálicas, mantención industrial y servicios especializados bajo altos estándares de seguridad y calidad.
+
+---
+
+## 5. SERVICIOS RESIDENCIALES
+
+Tarjetas 3D:
+
+⚡ Electricidad
+🚰 Gasfitería
+🎨 Pintura
+🏠 Techumbres
+🌿 Jardinería
+🏗️ Construcción
+🔩 Estructuras metálicas
+
+Cada tarjeta:
+
+* Imagen 3D
+* Lista resumida
+* Botón "Ver detalles"
+
+---
+
+## 6. SERVICIOS INDUSTRIALES AVANZADOS
+
+Mantener los servicios actuales y agregar:
+
+### MANTENCIÓN INDUSTRIAL
+
+* Mantención preventiva.
+* Mantención correctiva.
+* Mantención predictiva.
+* Paradas de planta.
+* Inspecciones técnicas.
+* Lubricación industrial.
+* Alineación de equipos.
+* Cambio de componentes.
+
+### PIPING INDUSTRIAL
+
+* Fabricación de spool.
+* Soldadura TIG/MIG.
+* Tuberías acero carbono.
+* Tuberías inoxidables.
+* Líneas de vapor.
+* Redes contra incendio.
+* Aire comprimido.
+* Líneas hidráulicas.
+
+### OBRAS CIVILES INDUSTRIALES
+
+* Radieres industriales.
+* Dados de hormigón.
+* Fundaciones.
+* Excavaciones.
+* Enfierraduras.
+* Pavimentos.
+* Muros de contención.
+* Canalizaciones.
+
+### MONTAJE INDUSTRIAL
+
+* Montaje de equipos.
+* Instalación de maquinaria.
+* Estructuras pesadas.
+* Alineamiento mecánico.
+* Izaje de cargas.
+* Desmontaje industrial.
+
+### SEGURIDAD INDUSTRIAL
+
+* Líneas de vida.
+* Sistemas anticaídas.
+* Señalización.
+* Demarcación.
+* Protecciones físicas.
+* Cierres perimetrales.
+
+### ENERGÍAS RENOVABLES
+
+* Paneles solares.
+* Inversores.
+* Bancos de baterías.
+* Cargadores para vehículos eléctricos.
+* Sistemas híbridos.
+* Eficiencia energética.
+
+---
+
+## 7. PROCESO DE TRABAJO
+
+Visual tipo línea de producción:
+
+1. Solicitud
+2. Visita técnica
+3. Cotización
+4. Ejecución
+5. Entrega
+6. Garantía
+
+Animaciones con movimiento.
+
+---
+
+## 8. PROYECTOS DESTACADOS
+
+Carrusel 3D:
+
+* Electricidad
+* Construcción
+* Techumbres
+* Pintura
+* Estructuras metálicas
+* Industria
+
+Filtros dinámicos.
+
+---
+
+## 9. COTIZADOR INTELIGENTE
+
+Formulario avanzado:
+
+* Tipo de cliente
+* Servicio
+* Urgencia
+* Ubicación
+* Fotografías
+* Comentarios
+
+Funciones:
+
+* Cálculo preliminar automático.
+* Seguimiento del estado.
+* Notificaciones por correo.
+* Integración WhatsApp.
+
+---
+
+## 10. ÁREAS DE COBERTURA
+
+Mapa interactivo:
+
+* Región Metropolitana
+* Valparaíso
+* San Antonio
+* Viña del Mar
+* Proyectos nacionales
+
+---
+
+## 11. CERTIFICACIONES Y SEGURIDAD
+
+Mostrar:
+
+* Cumplimiento normativo.
+* Protocolos de seguridad.
+* Uso de EPP.
+* Prevención de riesgos.
+* Trabajo en altura.
+* Procedimientos industriales.
+
+---
+
+## 12. TESTIMONIOS
+
+Tarjetas flotantes con estrellas y fotos.
+
+---
+
+## 13. BLOG TÉCNICO
+
+Publicaciones:
+
+* Consejos eléctricos.
+* Mantención industrial.
+* Techumbres.
+* Seguridad.
+* Construcción.
+
+Beneficio:
+Mejora enormemente el SEO.
+
+---
+
+## 14. PREGUNTAS FRECUENTES
+
+FAQ desplegable:
+
+* ¿Realizan emergencias?
+* ¿Atienden industrias?
+* ¿Hacen visitas técnicas?
+* ¿Trabajan fines de semana?
+* ¿Ofrecen garantía?
+
+---
+
+## 15. CONTACTO FINAL
+
+Gran llamada a la acción:
+
+"¿Necesitas una solución profesional?"
+
+Botones:
+
+[Solicitar Cotización]
+[Hablar por WhatsApp]
+
+Footer premium con redes sociales y mapa.
+
+---
+
+## EXPERIENCIA VISUAL
+
+Usar:
+
+* Three.js
+* React Three Fiber
+* Framer Motion
+* GSAP
+* Glassmorphism
+* Partículas
+* Parallax
+* Scroll cinematográfico
+* Sombras dinámicas
+* Luces ambientales
+* Reflejos metálicos
+
+La experiencia debe sentirse similar a una empresa multinacional de ingeniería y servicios industriales.

@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import { WhatsAppButton } from "@/components/layout/whatsapp-button";
+import { Preloader } from "@/components/layout/preloader";
 
 import Home from "@/pages/home";
 import Servicios from "@/pages/servicios";
@@ -40,13 +42,18 @@ function Router() {
 }
 
 function App() {
+  const [preloaderDone, setPreloaderDone] = useState(false);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-          <WhatsAppButton />
-        </WouterRouter>
+        <Preloader onComplete={() => setPreloaderDone(true)} />
+        {preloaderDone && (
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router />
+            <WhatsAppButton />
+          </WouterRouter>
+        )}
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>
