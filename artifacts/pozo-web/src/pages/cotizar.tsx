@@ -12,7 +12,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { toast } from "sonner";
 import { Loader2, UploadCloud, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
-import { useLocation } from "wouter";
+import { useState } from "react";
+import { FileUpload } from "@/components/upload/file-upload";
 
 const quoteSchema = z.object({
   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres").max(100),
@@ -23,12 +24,13 @@ const quoteSchema = z.object({
   serviceType: z.string().min(1, "Seleccione un servicio"),
   description: z.string().min(10, "Describa su proyecto con más detalle").max(2000),
   priority: z.enum(["low", "normal", "urgent"]),
+  imageUrls: z.array(z.string()).optional()
 });
 
 export default function Cotizar() {
-  const [_, setLocation] = useLocation();
+  const [submitted, setSubmitted] = useState(false);
   const { data: services, isLoading: servicesLoading } = useListServices();
-  const createQuote = useCreateQuote();
+  const createQuote = useCreateQuote(); 
 
   const form = useForm<z.infer<typeof quoteSchema>>({
     resolver: zodResolver(quoteSchema),
@@ -41,6 +43,8 @@ export default function Cotizar() {
       serviceType: "",
       description: "",
       priority: "normal",
+      imageUrls: [],
+
     },
   });
 
@@ -48,14 +52,40 @@ export default function Cotizar() {
     const { clientType, ...rest } = values;
     createQuote.mutate({ data: { ...rest, description: `[${clientType.toUpperCase()}] ${rest.description}` } }, {
       onSuccess: () => {
-        toast.success("Cotización enviada con éxito. Nos contactaremos pronto.");
-        setLocation("/");
+        setSubmitted(true);
       },
       onError: () => {
         toast.error("Ocurrió un error al enviar la cotización. Intente nuevamente.");
       }
     });
   };
+
+  if (submitted) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background">
+        <Navbar />
+        <main className="flex-1 pt-32 pb-24 flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-lg mx-auto px-4 text-center"
+          >
+            <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-6" />
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+              ¡Su solicitud ha sido enviada correctamente!
+            </h1>
+            <p className="text-lg text-muted-foreground mb-8">
+              Nuestro equipo revisará su solicitud y le contactaremos en menos de 24 horas. Hemos enviado una copia de su cotización a su correo electrónico.
+            </p>
+            <Button size="lg" onClick={() => setSubmitted(false)}>
+              Enviar otra solicitud
+            </Button>
+          </motion.div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -240,11 +270,10 @@ export default function Cotizar() {
                   )}
                 />
 
-                <div className="border-2 border-dashed border-border rounded-xl p-8 text-center bg-background/50 hover:bg-secondary/20 transition-colors cursor-pointer">
-                  <UploadCloud className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-                  <p className="text-sm text-foreground font-medium">Subir Fotografías o Planos</p>
-                  <p className="text-xs text-muted-foreground mt-1">Opcional — JPG, PNG, PDF hasta 10MB</p>
-                </div>
+                  <FileUpload
+                    value={form.watch("imageUrls") ?? []}
+                   onChange={(urls) => form.setValue("imageUrls", urls)}
+                 />
 
                 <div className="pt-2 flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
                   <p className="text-xs text-muted-foreground max-w-sm">
