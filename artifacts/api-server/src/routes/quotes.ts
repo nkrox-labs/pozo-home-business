@@ -2,7 +2,39 @@ import { Router } from "express";
 import { db, quotesTable } from "@workspace/db";
 import { eq, count, gte, sql } from "drizzle-orm";
 import { z } from "zod";
+import { Resend } from "resend";
 import { quoteSubmitRateLimit, requireAdmin, sanitizeInput } from "../middlewares/security";
+import { logger } from "../lib/logger";
+
+const resend = process.env["RESEND_API_KEY"] ? new Resend(process.env["RESEND_API_KEY"]) : null;
+
+async function notifyAdminOfNewQuote(quote: typeof quotesTable.$inferSelect) {
+  const adminEmail = process.env["ADMIN_NOTIFICATION_EMAIL"];
+  if (!resend || !adminEmail) return;
+
+  try {
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: adminEmail,
+      subject: `Nueva cotización: ${quote.serviceType} - ${quote.name}`,
+      html: `
+        <h2>Nueva solicitud de cotización</h2>
+        <p><strong>Nombre:</strong> ${quote.name}</p>
+        <p><strong>Correo:</strong> ${quote.email}</p>
+        <p><strong>Teléfono:</strong> ${quote.phone}</p>
+        <p><strong>Dirección:</strong> ${quote.address}</p>
+        <p><strong>Servicio:</strong> ${quote.serviceType}</p>
+        <p><strong>Prioridad:</strong> ${quote.priority}</p>
+        <p><strong>Descripción:</strong><br>${quote.description}</p>
+        ${quote.imageUrls && quote.imageUrls.length > 0
+          ? `<p><strong>Archivos adjuntos:</strong><br>${quote.imageUrls.map((url) => `<a href="${url}">${url}</a>`).join("<br>")}</p>`
+          : ""}
+      `,
+    });
+  } catch (err) {
+    logger.error({ err }, "Failed to send admin notification email");
+  }
+}
 
 const router = Router();
 
@@ -125,6 +157,8 @@ router.post("/", quoteSubmitRateLimit, async (req, res) => {
       imageUrls: data.imageUrls ?? [],
       status: "pending",
     }).returning();
+
+  void notifyAdminOfNewQuote(created!);
 
     res.status(201).json(formatQuote(created!));
   } catch (err) {
