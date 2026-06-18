@@ -3,6 +3,8 @@ import cors from "cors";
 import pinoHttp from "pino-http";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import pgSession from "connect-pg-simple";
+import { pool } from "@workspace/db";
 import router from "./routes";
 import { logger } from "./lib/logger";
 import { securityHeaders, apiRateLimit } from "./middlewares/security";
@@ -46,6 +48,11 @@ app.use(cookieParser());
 const isProd = process.env["NODE_ENV"] === "production";
 
 app.use(session({
+  store: new (pgSession(session))({
+    pool,
+    tableName: "session",
+    createTableIfMissing: false,
+  }),
   secret: process.env["SESSION_SECRET"]!,
   resave: false,
   saveUninitialized: false,
