@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const WHATSAPP_NUMBER = "56912345678";
+const WHATSAPP_NUMBER = "56948072210";
 const WHATSAPP_MSG = encodeURIComponent("Hola, me interesa solicitar una cotización con Pozo Home & Business.");
 
 export function WhatsAppButton() {
