@@ -73,8 +73,8 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex items-start gap-2">
                 <span className="text-primary mt-0.5">✉</span>
-                <a href="mailto:contacto@pozohomebusiness.cl" className="hover:text-primary transition-colors">
-                  contacto@pozohomebusiness.cl
+                <a href="mailto:contacto.pozohomebusiness@gmail.com" className="hover:text-primary transition-colors">
+                  contacto.pozohomebusiness@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-2">
