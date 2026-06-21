@@ -79,7 +79,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">☎</span>
-                <span>+56 9 XXXX XXXX</span>
+                <span>+56948072210</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">⏰</span>
@@ -87,7 +87,7 @@ export function Footer() {
               </li>
               <li className="pt-2">
                 <a
-                  href="https://wa.me/56912345678"
+                  href="https://wa.me/56948072210"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors font-medium"
